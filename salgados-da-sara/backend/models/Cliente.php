@@ -8,9 +8,8 @@ class Cliente {
     public $telefone;
     public $email;
     public $senha;
-    public $id_endereco;
+    public $cod_endereco;
     public $sigla_cidade;
-    public $criado_em;
 
     // Dados do endereço
     public $rua;
@@ -45,12 +44,12 @@ class Cliente {
             }
 
             $endereco_result = $endereco_stmt->fetch(PDO::FETCH_ASSOC);
-            $this->id_endereco = $endereco_result['id_endereco'];
+            $this->cod_endereco = $endereco_result['id_endereco'];
 
             // Depois, criar o cliente
             $cliente_query = "INSERT INTO " . $this->table_name . " 
-                             (nome, telefone, email, senha, id_endereco, sigla_cidade) 
-                             VALUES (:nome, :telefone, :email, :senha, :id_endereco, :sigla_cidade)";
+                             (nome, telefone, email, senha, cod_endereco, sigla_cidade) 
+                             VALUES (:nome, :telefone, :email, :senha, :cod_endereco, :sigla_cidade)";
 
             $cliente_stmt = $this->conn->prepare($cliente_query);
 
@@ -65,7 +64,7 @@ class Cliente {
             $cliente_stmt->bindParam(":telefone", $this->telefone);
             $cliente_stmt->bindParam(":email", $this->email);
             $cliente_stmt->bindParam(":senha", $this->senha);
-            $cliente_stmt->bindParam(":id_endereco", $this->id_endereco);
+            $cliente_stmt->bindParam(":cod_endereco", $this->cod_endereco);
             $cliente_stmt->bindParam(":sigla_cidade", $this->sigla_cidade);
 
             if ($cliente_stmt->execute()) {
@@ -85,11 +84,11 @@ class Cliente {
 
     // Login cliente
     function login($telefone, $senha) {
-        $query = "SELECT c.codigo, c.nome, c.telefone, c.email, c.senha, c.criado_em,
+        $query = "SELECT c.codigo, c.nome, c.telefone, c.email, c.senha,
                          e.rua, e.numero, e.cep, e.complemento, e.bairro,
                          ci.nome as cidade_nome, c.sigla_cidade
                   FROM " . $this->table_name . " c
-                  LEFT JOIN endereco e ON c.id_endereco = e.id_endereco
+                  LEFT JOIN endereco e ON c.cod_endereco = e.id_endereco
                   LEFT JOIN cidade ci ON c.sigla_cidade = ci.sigla
                   WHERE c.telefone = :telefone";
 
@@ -105,7 +104,6 @@ class Cliente {
                 $this->nome = $row['nome'];
                 $this->telefone = $row['telefone'];
                 $this->email = $row['email'];
-                $this->criado_em = $row['criado_em'];
                 $this->rua = $row['rua'];
                 $this->numero = $row['numero'];
                 $this->cep = $row['cep'];
@@ -134,11 +132,11 @@ class Cliente {
 
     // Obter cliente por ID
     function readOne() {
-        $query = "SELECT c.codigo, c.nome, c.telefone, c.email, c.criado_em,
+        $query = "SELECT c.codigo, c.nome, c.telefone, c.email,
                          e.rua, e.numero, e.cep, e.complemento, e.bairro,
                          ci.nome as cidade_nome, c.sigla_cidade
                   FROM " . $this->table_name . " c
-                  LEFT JOIN endereco e ON c.id_endereco = e.id_endereco
+                  LEFT JOIN endereco e ON c.cod_endereco = e.id_endereco
                   LEFT JOIN cidade ci ON c.sigla_cidade = ci.sigla
                   WHERE c.codigo = :codigo";
 
@@ -152,7 +150,6 @@ class Cliente {
             $this->nome = $row['nome'];
             $this->telefone = $row['telefone'];
             $this->email = $row['email'];
-            $this->criado_em = $row['criado_em'];
             $this->rua = $row['rua'];
             $this->numero = $row['numero'];
             $this->cep = $row['cep'];

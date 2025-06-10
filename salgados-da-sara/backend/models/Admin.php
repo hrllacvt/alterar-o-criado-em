@@ -7,7 +7,6 @@ class Admin {
     public $login;
     public $senha;
     public $super_admin;
-    public $criado_em;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -41,7 +40,7 @@ class Admin {
 
     // Login admin
     function login($login, $senha) {
-        $query = "SELECT cod_admin, login, senha, super_admin, criado_em 
+        $query = "SELECT cod_admin, login, senha, super_admin 
                   FROM " . $this->table_name . " 
                   WHERE login = :login";
 
@@ -56,7 +55,6 @@ class Admin {
                 $this->cod_admin = $row['cod_admin'];
                 $this->login = $row['login'];
                 $this->super_admin = $row['super_admin'];
-                $this->criado_em = $row['criado_em'];
                 return true;
             }
         }
@@ -66,9 +64,9 @@ class Admin {
 
     // Obter todos os admins
     function readAll() {
-        $query = "SELECT cod_admin, login, super_admin, criado_em 
+        $query = "SELECT cod_admin, login, super_admin 
                   FROM " . $this->table_name . " 
-                  ORDER BY criado_em DESC";
+                  ORDER BY login";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

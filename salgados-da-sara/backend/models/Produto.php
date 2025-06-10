@@ -10,7 +10,6 @@ class Produto {
     public $id_categoria;
     public $eh_porcionado;
     public $eh_personalizado;
-    public $criado_em;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -49,7 +48,7 @@ class Produto {
     // Ler todos os produtos
     function readAll() {
         $query = "SELECT p.id_produto, p.nome, p.preco, p.sabor, p.eh_porcionado, 
-                         p.eh_personalizado, p.criado_em,
+                         p.eh_personalizado,
                          c.nome_categoria, c.descricao_categoria
                   FROM " . $this->table_name . " p
                   LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
@@ -64,7 +63,7 @@ class Produto {
     // Ler um produto
     function readOne() {
         $query = "SELECT p.id_produto, p.nome, p.preco, p.sabor, p.eh_porcionado, 
-                         p.eh_personalizado, p.criado_em, p.id_categoria,
+                         p.eh_personalizado, p.id_categoria,
                          c.nome_categoria, c.descricao_categoria
                   FROM " . $this->table_name . " p
                   LEFT JOIN categoria c ON p.id_categoria = c.id_categoria
@@ -83,7 +82,6 @@ class Produto {
             $this->id_categoria = $row['id_categoria'];
             $this->eh_porcionado = $row['eh_porcionado'];
             $this->eh_personalizado = $row['eh_personalizado'];
-            $this->criado_em = $row['criado_em'];
             return true;
         }
 

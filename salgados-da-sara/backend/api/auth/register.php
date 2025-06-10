@@ -134,8 +134,7 @@ try {
                     "complemento" => $cliente->complemento,
                     "cidade" => $cliente->sigla_cidade,
                     "bairro" => $cliente->bairro,
-                    "cep" => $cliente->cep,
-                    "criado_em" => $cliente->criado_em
+                    "cep" => $cliente->cep
                 )
             );
             

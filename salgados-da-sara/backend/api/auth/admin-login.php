@@ -21,8 +21,7 @@ if(!empty($data->username) && !empty($data->password)) {
             "admin" => array(
                 "id" => $admin->cod_admin,
                 "nome_usuario" => $admin->login,
-                "funcao" => $admin->super_admin ? 'super_admin' : 'admin',
-                "criado_em" => $admin->criado_em
+                "funcao" => $admin->super_admin ? 'super_admin' : 'admin'
             )
         );
         

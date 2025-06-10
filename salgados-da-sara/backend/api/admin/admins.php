@@ -42,8 +42,7 @@ try {
                     $admin_item = array(
                         "id" => $cod_admin,
                         "nome_usuario" => $login,
-                        "funcao" => $super_admin ? 'super_admin' : 'admin',
-                        "criado_em" => $criado_em
+                        "funcao" => $super_admin ? 'super_admin' : 'admin'
                     );
                     
                     array_push($admins_arr, $admin_item);

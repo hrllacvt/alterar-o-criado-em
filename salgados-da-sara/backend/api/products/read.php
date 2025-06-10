@@ -52,8 +52,7 @@ try {
                 "categoria" => $categoria_antiga,
                 "descricao" => $descricao_categoria,
                 "eh_porcionado" => $eh_porcionado,
-                "eh_personalizado" => $eh_personalizado,
-                "criado_em" => $criado_em
+                "eh_personalizado" => $eh_personalizado
             );
             
             array_push($products_arr, $product_item);

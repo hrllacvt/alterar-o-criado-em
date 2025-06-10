@@ -228,7 +228,7 @@ const History = {
                             Total: ${Utils.formatCurrency(order.total)}
                         </div>
                         
-                        ${order.status ===   'rejeitado' && order.motivo_rejeicao ? `
+                        ${order.status === 'rejeitado' && order.motivo_rejeicao ? `
                             <div class="rejection-reason">
                                 <strong>Motivo da recusa:</strong> ${order.motivo_rejeicao}
                             </div>
